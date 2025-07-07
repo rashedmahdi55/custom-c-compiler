@@ -20,7 +20,7 @@ static void usage(char* prog)
 }
 
 // printable tokens
-char * tokenStr[] = {"+", "-", "*", "/", "INTLIT"};
+char * tokenStr[] = {"+", "-", "*", "/", "intlit"};
 
 // scans the file and prints each found token
 static void scanFile(void)
@@ -29,10 +29,10 @@ static void scanFile(void)
 
     while(scan(&t))
     {
-        printf("Token: %s", tokenStr[t.token]);     // prints each token found
+        printf("token: %s", tokenStr[t.token]);     // prints each token found
         if (t.token == T_INTLIT)
         {
-            printf(", value: %d", t.intValue);
+            printf(", value %d", t.intValue);
         }
 
         printf("\n");
