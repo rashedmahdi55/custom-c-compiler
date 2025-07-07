@@ -32,7 +32,7 @@ static void scanFile(void)
         printf("token: %s", tokenStr[t.token]);     // prints each token found
         if (t.token == T_INTLIT)
         {
-            printf(", value %d", t.intValue);
+            printf(", value: %d", t.intValue);
         }
 
         printf("\n");
