@@ -5,4 +5,4 @@
 // global variables
 extern_ int line;
 extern_ int putback;
-extern_ FILE inFile;
+extern_ FILE *inFile;
