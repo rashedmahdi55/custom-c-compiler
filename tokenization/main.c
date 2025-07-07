@@ -4,7 +4,7 @@
 #include "data.h"           // other files will inherit them as extern
 #undef extern_
 
-#include "defs.h"
+#include "decl.h"
 
 // setting up initial condition
 static void init(void)

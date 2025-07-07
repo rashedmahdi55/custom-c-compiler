@@ -46,6 +46,7 @@ static void putbackChar(int c)
     putback = c;
 }
 
+// finds char position in a string
 static int chrpos(char* s, int c)
 {
     char * p;
@@ -54,6 +55,7 @@ static int chrpos(char* s, int c)
     return (p ? p - s : - 1);
 }
 
+// scans an integer token and extracts its value
 static int scanInt(int c)
 {
     int k, val;
@@ -71,6 +73,7 @@ static int scanInt(int c)
     return val;
 }
 
+// scans token
 int scan(struct token *t)
 {
     int c;
