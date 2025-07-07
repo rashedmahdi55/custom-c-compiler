@@ -58,7 +58,7 @@ static int chrpos(char* s, int c)
 // scans an integer token and extracts its value
 static int scanInt(int c)
 {
-    int k, val;
+    int k, val = 0;
 
     while((k = chrpos("0123456789", c)) >= 0)       // parses the whole integer value
     {
@@ -86,12 +86,16 @@ int scan(struct token *t)
             return (0);
         case '+':
             t -> token = T_PLUS;
+            break;
         case '-':
             t -> token = T_MINUS;
+            break;
         case '*':
             t -> token = T_STAR;
+            break;
         case '/':
             t -> token = T_SLASH;
+            break;
 
         default:
             if (isdigit(c))
