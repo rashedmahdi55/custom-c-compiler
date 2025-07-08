@@ -44,28 +44,101 @@ static struct astNode *primary(void)
     }
 }
 
-struct astNode *binExpr(void)
-{
-    struct astNode *node, *left, *right;
-    int nodeType;
+struct astNode *add_expr(void);
 
-    // gets the integer literal on the left
+struct astNode *mul_expr(void)
+{
+    struct astNode *left, *right;
+    int tokenType;
+
     left = primary();
 
-    // if reached EOF, return the left node
-    if (Token.token == T_EOF)
+    tokenType = Token.token;
+
+    if (tokenType == T_EOF)
     {
         return (left);
     }
 
-    nodeType = tokenToAstOp(Token.token);
+    while (tokenType == T_SLASH || tokenType == T_STAR)
+    {
+        scan(&Token);
 
-    // gets the next token
-    scan(&Token);
+        right = primary();
 
-    // recursively gets the right node
-    right = binExpr();
+        left = mkAstNode(tokenToAstOp(tokenType), left, right, 0);
 
-    // builds a tree with left and right sub-tree
-    node = mkAstNode(nodeType, left, right, 0);
+
+        tokenType = Token.token;
+        if (tokenType == T_EOF)
+        {
+            break;
+        }
+    }
+
+    return left;
 }
+
+struct astNode *add_expr(void)
+{
+    struct astNode *left, *right;
+    int tokenType;
+
+    left = mul_expr();
+
+    tokenType = Token.token;
+
+    if (tokenType == T_EOF)
+    {
+        return left;
+    }
+
+    while(1)
+    {
+        scan(&Token);
+
+        right = mul_expr();
+
+        left = mkAstNode(tokenToAstOp(tokenType), left, right, 0);
+
+        tokenType = Token.token;
+
+        if (tokenType == T_EOF)
+        {
+            break;
+        }
+    }
+
+    return left;
+}
+
+struct astNode *binExpr(void)
+{
+    return (add_expr());
+}
+
+// struct astNode *binExpr(void)
+// {
+//     struct astNode *node, *left, *right;
+//     int nodeType;
+
+//     // gets the integer literal on the left
+//     left = primary();
+
+//     // if reached EOF, return the left node
+//     if (Token.token == T_EOF)
+//     {
+//         return (left);
+//     }
+
+//     nodeType = tokenToAstOp(Token.token);
+
+//     // gets the next token
+//     scan(&Token);
+
+//     // recursively gets the right node
+//     right = binExpr();
+
+//     // builds a tree with left and right sub-tree
+//     node = mkAstNode(nodeType, left, right, 0);
+// }
