@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     struct astNode *node;
     node = binExpr();
 
-    printf("result: %d\n", interpretAst(node));
+    printf("result: %d\n", interpretAst(node, 0));
 
     exit(0);
 }

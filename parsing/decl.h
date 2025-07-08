@@ -13,4 +13,4 @@ struct astNode *mkAstUnaryNode(int op, struct astNode *left, int intValue);
 struct astNode *binExpr(void);
 
 // AST tree interpreter
-int interpretAst(struct astNode *node);
+int interpretAst(struct astNode *node, int n);
