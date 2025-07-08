@@ -72,6 +72,11 @@ int interpretAst(struct astNode *node, int sp)
         case A_MUL:
             return (leftVal * rightVal);
         case A_DIV:
+            if (rightVal == 0)
+            {
+                fprintf(stderr, "Error: division by zero\n");
+                exit(1);
+            }
             return (leftVal / rightVal);
 
         case A_INTLIT:                          // base case for recursive call
